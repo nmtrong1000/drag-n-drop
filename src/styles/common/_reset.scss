@@ -1,0 +1,140 @@
+/* Style for all */
+
+* {
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/* HTML */
+
+html {
+  font-feature-settings: 'palt';
+  line-height: 1.6; /* W3C recommendation */
+  font-size-adjust: 100%;
+  font-size: 62.5%;
+}
+
+/* Reset body font size */
+
+body {
+  font-size: 1.4rem;
+}
+
+/* Reset margin, padding */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+hr,
+pre,
+blockquote,
+ol,
+ul,
+menu,
+dl,
+dd,
+figure,
+form,
+input,
+button,
+select,
+option,
+textarea,
+fieldset,
+legend {
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset list */
+
+li {
+  list-style-type: none;
+}
+
+/* Reset image */
+
+img {
+  vertical-align: top;
+  max-width: 100%;
+}
+
+/* Reset color */
+
+mark,
+a,
+input,
+button,
+select,
+textarea {
+  color: inherit;
+  background: transparent;
+}
+
+/* Reset font */
+
+address,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+var,
+samp,
+kbd,
+input,
+button,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Reset underline */
+
+s,
+abbr,
+u,
+a,
+ins,
+del {
+  text-decoration: none;
+}
+
+/* Reset border */
+
+iframe,
+input,
+select,
+textarea,
+fieldset {
+  border-radius: 0;
+  border: 1px solid;
+}
+
+a, button {
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+
+    img {
+      opacity: 0.9;
+    }
+  }
+}
+
+hr {
+  border-style: solid;
+  border-top: none;
+}

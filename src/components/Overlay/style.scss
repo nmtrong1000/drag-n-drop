@@ -1,0 +1,11 @@
+@use 'src/styles/common/mixins' as *;
+
+.c-overlay {
+  background-color: rgba(#000, .6);
+  transition: .2s ease;
+  @include fullWidth02();
+  @include visible( false );
+  &--active {
+    @include visible( true );
+  }
+}
