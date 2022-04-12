@@ -8,13 +8,12 @@
     </el-row>
     <component
       :is="renderedComponent"
-      :content="encodeHTML(config.props.html)"
-      :style="config.props.style"
+      :config="config"
     />
   </div>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import {
   Edit,
   ArrowDown,
@@ -22,29 +21,30 @@ import {
   Close
 } from '@element-plus/icons-vue'
 
-import { encodeHTML } from 'src/helpers'
 import { useTemplateStore } from 'src/store/template'
+import type { templateConfig } from 'src/store/template/types'
 import { useUIStore } from 'src/store/ui'
 
 const props = defineProps<{
-  config: {
-    id: string
-    component: string
-    props: {
-      html: string
-      style?: string
-    }
-  }
+  config: templateConfig
 }>()
 
 const templateStore = useTemplateStore()
 const uiStore = useUIStore()
 const renderedComponent = computed(() => {
-  return templateStore.registered[props.config.component]
+  const templatePart = templateStore.registered.find( c => c.id === props.config.component )
+  return templatePart ? templatePart.component.base: null
 })
 
 const openEditor = () => {
   uiStore.toggleSidebar('template')
+  templateStore.$patch({
+    editingId: props.config.id
+  })
 }
+
+onMounted(() => {
+  console.log('config', props.config)
+})
 </script>
 <style lang="scss" src="./style.scss" scoped />

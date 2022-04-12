@@ -26,7 +26,7 @@
       <el-col :span="5">
         <nav>
           <draggable
-            v-for="(part, idx) in templateParts"
+            v-for="(part, idx) in templateConfig"
             :key="idx"
             :icon="part.icon"
           >
@@ -37,7 +37,7 @@
       <el-col :span="19">
         <section class="p-admin__droppable">
           <drop-content
-            v-for="element in insertedElements"
+            v-for="element in templateStore.elements"
             :key="element.id"
             :config="element"
           />
@@ -45,39 +45,25 @@
         <footer>
           <p>Mouse: (0, 7)</p>
           <p>Dragging: Button</p>
-          <p>Instances: {{ insertedElements.length }}</p>
-          <p>Config: {{ JSON.stringify(insertedElements[0]) }}</p>
+          <p>Instances: {{ templateStore.elements.length }}</p>
+          <p>Config: {{ JSON.stringify(templateStore.elements[0]) }}</p>
         </footer>
       </el-col>
     </el-row>
-    <sidebar
-      direction="right"
-      width="500px"
-      :active="uiStore.sidebar.template"
-      @close="uiStore.reset"
-      title="Edit Template Part"
-    >
-      <template #footer>
-        <el-row justify="center">
-          <el-button type="danger" :icon="Delete">Discard</el-button>
-          <el-button type="primary" :icon="DocumentChecked">Save</el-button>
-        </el-row>
-      </template>
-    </sidebar>
+    <admin-editor />
   </main>
 </template>
 <script lang="ts" setup>
-import {
-  Delete,
-  DocumentChecked
-} from '@element-plus/icons-vue'
+import AdminEditor from './components/Editor/index.vue'
 import { menu } from './mocks/menu'
-import { templateParts } from './mocks/templateParts'
+import { templateConfig } from 'src/store/template/config'
 import { useRouter } from 'vue-router'
 import { useUIStore } from 'src/store/ui'
+import { useTemplateStore } from 'src/store/template'
 
 const router = useRouter()
 const uiStore = useUIStore()
+const templateStore = useTemplateStore()
 
 const menuActions = {
   'action-save': () => {
@@ -102,24 +88,5 @@ const menuActions = {
     router.push({ name: 'consumer' })
   }
 }
-
-const insertedElements = [
-  {
-    id: `${Math.floor(Math.random() * 1000)}`,
-    component: 'paragraph',
-    props: {
-      html: 'demo',
-      style: 'color: red'
-    }
-  },
-  {
-    id: `${Math.floor(Math.random() * 1000)}`,
-    component: 'button',
-    props: {
-      html: 'demo',
-      style: 'color: red'
-    }
-  }
-]
 </script>
 <style lang="scss" src="./style.scss" />

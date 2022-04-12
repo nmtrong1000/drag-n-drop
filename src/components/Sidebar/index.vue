@@ -14,12 +14,9 @@
         </p>
         <el-button @click="emit('close')" circle :icon="Close" />
       </header>
-      <div>
+      <div class="c-sidebar__inner">
         <slot />
       </div>
-      <footer v-if="$slots.footer">
-        <slot name="footer" />
-      </footer>
     </div>
   </aside>
 </template>

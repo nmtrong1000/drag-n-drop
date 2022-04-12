@@ -5,14 +5,21 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./components/templates/Button/index.vue')['default']
+    ButtonEditor: typeof import('./components/templates/Button/ButtonEditor.vue')['default']
     Draggable: typeof import('./components/Draggable/index.vue')['default']
     DropContent: typeof import('./components/DropContent/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     Loading: typeof import('./components/Loading/index.vue')['default']
     Overlay: typeof import('./components/Overlay/index.vue')['default']
     Paragraph: typeof import('./components/templates/Paragraph/index.vue')['default']
+    ParagraphEditor: typeof import('./components/templates/Paragraph/ParagraphEditor.vue')['default']
     Sidebar: typeof import('./components/Sidebar/index.vue')['default']
   }
 }

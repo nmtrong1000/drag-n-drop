@@ -4,9 +4,10 @@
   </component>
 </template>
 <script lang="ts" setup>
-import { defineAsyncComponent, computed, defineComponent, markRaw } from 'vue'
+import { defineAsyncComponent, computed, markRaw } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTemplateStore } from 'src/store/template'
+import { templateConfig } from 'src/store/template/config'
 
 const { currentRoute } = useRouter()
 const layoutMappings = {
@@ -21,8 +22,5 @@ const layout = computed( () => {
 } )
 
 const templateStore = useTemplateStore()
-templateStore.register({
-  'button': markRaw( defineAsyncComponent( () => import( 'src/components/templates/Button/index.vue' ) ) ),
-  'paragraph': markRaw( defineAsyncComponent( () => import( 'src/components/templates/Paragraph/index.vue' ) ) )
-})
+templateStore.register( templateConfig )
 </script>

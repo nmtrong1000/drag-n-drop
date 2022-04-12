@@ -31,4 +31,9 @@ app.use( head )
 app.use( createPinia() )
 app.use( router )
 
+app.config.errorHandler = ( err, vm, info ) => {
+  /* Global Exception handler */
+  console.error(err)
+}
+
 app.mount( '#app' )

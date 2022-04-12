@@ -1,10 +1,12 @@
 <template>
-  <button :style="style">
-    {{ content }}
+  <button :style="config.props.style">
+    {{ config.props.content }}
   </button>
 </template>
 <script lang="ts" setup>
-import type { TemplateProps } from 'src/store/template/types'
-defineProps<TemplateProps>()
+import type { templateConfig } from 'src/store/template/types'
+defineProps<{
+  config: templateConfig
+}>()
 </script>
 <style lang="scss" src="./style.scss" scoped />
