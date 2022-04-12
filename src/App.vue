@@ -4,7 +4,7 @@
   </component>
 </template>
 <script lang="ts" setup>
-import { defineAsyncComponent, computed, markRaw } from 'vue'
+import { defineAsyncComponent, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTemplateStore } from 'src/store/template'
 import { templateConfig } from 'src/store/template/config'
@@ -23,4 +23,7 @@ const layout = computed( () => {
 
 const templateStore = useTemplateStore()
 templateStore.register( templateConfig )
+onMounted(() => {
+  templateStore.loadTemplate()
+})
 </script>

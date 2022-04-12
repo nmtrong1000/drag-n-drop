@@ -1,3 +1,13 @@
+export type templateProps = {
+  content: string
+  style?: {
+    [k: string]: string
+  }
+  extensions?: {
+    [k: string]: any
+  }
+}
+
 export type templatePart = {
   id: string
   title: string
@@ -6,24 +16,20 @@ export type templatePart = {
     base: any
     editor: any
   }
+  defaultProps: templateProps
 }
 
 export type templateConfig = {
   id: string
   component: string
-  props: {
-    content: string
-    style?: {
-      [k: string]: string
-    }
-    extensions?: {
-      [k: string]: string | number
-    }
-  }
+  props: templateProps
 }
 
 export interface IState {
   registered: templatePart[]
   elements: templateConfig[]
   editingId: string | null
+  loaded: boolean
+  backward: templateConfig[]
+  forward: templateConfig[]
 }

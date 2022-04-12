@@ -13,6 +13,15 @@ export const templateConfig: templatePart[] = [
     component:{
       base: markRaw( defineAsyncComponent( () => import( 'src/components/templates/Button/index.vue' ) ) ),
       editor: markRaw( defineAsyncComponent( () => import( 'src/components/templates/Button/ButtonEditor.vue' ) ) )
+    },
+    defaultProps: {
+      content: 'Button',
+      style: {
+        color: '#000000'
+      },
+      extensions: {
+        actionMsg: ''
+      }
     }
   },
   {
@@ -22,6 +31,12 @@ export const templateConfig: templatePart[] = [
     component: {
       base: markRaw( defineAsyncComponent( () => import( 'src/components/templates/Paragraph/index.vue' ) ) ),
       editor: markRaw( defineAsyncComponent( () => import( 'src/components/templates/Paragraph/ParagraphEditor.vue' ) ) )
+    },
+    defaultProps: {
+      content: 'Paragraph',
+      style: {
+        color: '#000000'
+      }
     }
   }
 ]
