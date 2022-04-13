@@ -12,7 +12,11 @@
         <p v-if="title">
           {{ title }}
         </p>
-        <el-button @click="emit('close')" circle :icon="Close" />
+        <el-button
+          circle
+          :icon="Close"
+          @click="emit('close')"
+        />
       </header>
       <div class="c-sidebar__inner">
         <slot />
@@ -22,6 +26,7 @@
 </template>
 <script lang="ts" setup>
 import { Close } from '@element-plus/icons-vue'
+
 withDefaults(
   defineProps<{
     direction: 'left' | 'right'
@@ -34,8 +39,8 @@ withDefaults(
   }
 )
 
-const emit = defineEmits({
+const emit = defineEmits( {
   close: null
-})
+} )
 </script>
 <style lang="scss" src="./style.scss" scoped />

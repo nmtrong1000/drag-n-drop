@@ -14,16 +14,14 @@ const layoutMappings = {
   'default': defineAsyncComponent( () => import( 'src/layouts/Default/index.vue' ) )
 }
 const layout = computed( () => {
-
   const { meta } = currentRoute.value
 
   return layoutMappings[( meta.layout as string ) || 'default']
-
 } )
-
 const templateStore = useTemplateStore()
+
 templateStore.register( templateConfig )
-onMounted(() => {
+onMounted( () => {
   templateStore.loadTemplate()
-})
+} )
 </script>

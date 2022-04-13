@@ -12,8 +12,8 @@ defineProps<{
   active: boolean
 }>()
 
-const emit = defineEmits({
+const emit = defineEmits( {
   close: null
-})
+} )
 </script>
 <style lang="scss" src="./style.scss" scoped />

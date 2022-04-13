@@ -1,8 +1,9 @@
 @use 'src/styles/common/variables' as *;
+@use 'sass:string';
 
 @mixin fullWidth( $px: 0, $pos: absolute, $zIndex: 1 ) {
   /// Fully align an absolute element
-  position: unquote( $pos );
+  position: string.unquote($pos);
   top: $px;
   left: $px;
   right: $px;
@@ -22,24 +23,28 @@
 
 @mixin center( $x: true, $y: true, $pos: absolute ) {
   /// Center an absolute element
-  position: unquote( $pos );
+  position: string.unquote($pos);
+
   $posX: 0;
   $posY: 0;
-  @if( $x ) {
+
+  @if $x {
     left: 50%;
     $posX: -50%;
   }
-  @if( $y ) {
+
+  @if $y {
     top: 50%;
     $posY: -50%;
   }
-  transform: translate( $posX, $posY );
+
+  transform: translate($posX, $posY);
   @content;
 }
 
 @mixin visible( $flag: true ) {
   /// Visible and invisible
-  @if( $flag ) {
+  @if $flag {
     visibility: visible;
     opacity: 1;
   } @else {
@@ -48,17 +53,17 @@
   }
 }
 
-@mixin mediaQuery( $breakpoint: "full" ) {
-  $breakpoint: unquote( $breakpoint );
+@mixin mediaQuery( $breakpoint: 'full' ) {
+  $breakpoint: $breakpoint;
 
-  @if( $breakpoint == full ) {
+  @if $breakpoint == full {
     @content;
-  } @else if( $breakpoint == xs ) {
-    @media ( max-width: map-get( $breakpoints, $breakpoint ) ) {
+  } @else if  $breakpoint == xs {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
       @content;
     }
   } @else {
-    @media ( min-width: map-get( $breakpoints, $breakpoint ) ) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
       @content;
     }
   }

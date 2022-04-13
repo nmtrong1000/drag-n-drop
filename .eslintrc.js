@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    'vue/setup-compiler-macros': true
   },
   extends: [
     'eslint:recommended',
@@ -38,7 +39,7 @@ module.exports = {
     'comma-dangle': 'error',
     'prefer-promise-reject-errors': 'error',
     'no-unneeded-ternary': 'error',
-    'padded-blocks': 'error',
+    'padded-blocks': ['error', 'never'],
     'no-unreachable': 'error',
     'dot-notation': 'off',
     'accessor-pairs': 'error',

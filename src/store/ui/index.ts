@@ -12,9 +12,9 @@ const initialState: IState = {
 }
 
 export const useUIStore = defineStore( 'ui', {
-  state: () => ({ ...initialState }),
+  state: () => ( { ...initialState } ),
   actions: {
-    toggleLoading( msg: string = 'Processing' ) {
+    toggleLoading( msg = 'Processing' ) {
       this.loading = !this.loading
       this.overlay = this.loading
       if( this.loading ) {
@@ -27,9 +27,10 @@ export const useUIStore = defineStore( 'ui', {
     },
     reset() {
       const { overlay, loading, sidebar } = initialState
+
       this.overlay = overlay
       this.loading = loading
-      for(const p of Object.keys(sidebar)) {
+      for( const p of Object.keys( sidebar ) ) {
         this.sidebar[p] = false
       }
     }

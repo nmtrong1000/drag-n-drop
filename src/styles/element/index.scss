@@ -19,24 +19,23 @@ $--colors: (
     'base': #0a84ed,
   )
 );
-
 $--border-radius: (
   'base': 0,
   'small': 2px,
   'round': 20px,
   'circle': 100%
 );
-
 $--font-family: (
   '': 'Roboto, sans-serif'
 );
 
 @use 'element-plus/theme-chalk/display.css';
+
 // You should use them in scss, because we calculate it by sass.
 // comment next lines to use default color
 @forward 'element-plus/theme-chalk/src/common/var.scss' with
   (
-    
+
     $colors: $--colors,
     $button-padding-horizontal: ('default': 50px),
     $border-radius: $--border-radius,
@@ -48,6 +47,7 @@ $--font-family: (
 
 // You can comment it to hide debug info.
 // @debug $--colors;
+
 .el-divider--horizontal {
   margin: 12px 0;
 }

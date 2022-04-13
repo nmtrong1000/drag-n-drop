@@ -20,9 +20,7 @@ const apolloClient = new ApolloClient( {
 const head = createHead()
 const app = createApp( {
   setup() {
-
     provide( DefaultApolloClient, apolloClient )
-
   },
   render: () => h( App )
 } )
@@ -33,7 +31,7 @@ app.use( router )
 
 app.config.errorHandler = ( err, vm, info ) => {
   /* Global Exception handler */
-  console.error(err)
+  console.error( err )
 }
 
 app.mount( '#app' )

@@ -1,8 +1,12 @@
 <template>
-  <p :style="config.props.style" v-html="config.props.content" />
+  <p
+    :style="config.props.style"
+    v-html="config.props.content"
+  />
 </template>
 <script lang="ts" setup>
 import type { TemplateConfig } from 'src/store/template/types'
+
 defineProps<{
   config: TemplateConfig
 }>()

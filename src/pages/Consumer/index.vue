@@ -2,7 +2,9 @@
   <el-container class="p-consumer">
     <el-header class="p-consumer__header">
       <router-link :to="{ name: 'admin' }">
-        <el-button :icon="Back">Back</el-button>
+        <el-button :icon="Back">
+          Back
+        </el-button>
       </router-link>
     </el-header>
     <el-main>
@@ -11,8 +13,8 @@
         :key="e.id"
       >
         <component
-          :is="getBaseComponent(e.component)"
           :config="e"
+          :is="getBaseComponent(e.component)"
         />
       </div>
     </el-main>
@@ -24,10 +26,10 @@ import { storeToRefs } from 'pinia'
 import { useTemplateStore } from 'src/store/template'
 
 const templateStore = useTemplateStore()
-const {registered, elements } = storeToRefs(templateStore)
-
+const {registered, elements } = storeToRefs( templateStore )
 const getBaseComponent = ( id: string ) => {
-  const selected = registered.value.find(c => c.id === id)
+  const selected = registered.value.find( c => c.id === id )
+
   return selected ? selected.component.base: null
 }
 </script>

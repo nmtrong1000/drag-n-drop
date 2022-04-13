@@ -1,36 +1,39 @@
 <template>
   <main class="p-admin">
     <header class="p-admin__header">
-      <el-row justify="end" :gutter="10">
+      <el-row
+        justify="end"
+        :gutter="10"
+      >
         <el-col
-          v-for="(item, idx) in menu"
-          :key="idx"
           :span="24 / menu.length"
           :xs="{ span: 24 / menu.length * 2 }"
+          v-for="(item, idx) in menu"
+          :key="idx"
         >
           <el-upload
             action="#"
-            v-if="item.id == 'action-import'"
             :auto-upload="false"
             :show-file-list="false"
             :multiple="false"
             :on-change="menuActions[item.id]"
+            v-if="item.id == 'action-import'"
           >
             <el-button
               :type="item.type"
               :icon="item.icon"
-              @click="(e) => { e.preventDefault() }"
               plain
+              @click="(e) => { e.preventDefault() }"
             >
               {{ item.title }}
             </el-button>
           </el-upload>
           <el-button
-            v-else
             :type="item.type"
             :icon="item.icon"
-            @click="menuActions[item.id]"
             plain
+            v-else
+            @click="menuActions[item.id]"
           >
             {{ item.title }}
           </el-button>
@@ -41,12 +44,15 @@
       class="p-admin__inner"
       :gutter="0"
     >
-      <el-col :span="5" class="hidden-xs-only">
+      <el-col
+        :span="5"
+        class="hidden-xs-only"
+      >
         <nav>
           <draggable
+            :icon="part.icon"
             v-for="(part, idx) in templateConfig"
             :key="idx"
-            :icon="part.icon"
             @mousedown="(e) => handleDragging(e, part)"
             @dragstart="handleDragStart"
           >
@@ -54,19 +60,30 @@
           </draggable>
         </nav>
       </el-col>
-      <el-col :span="19" :xs="{ span: 24 }">
+      <el-col
+        :span="19"
+        :xs="{ span: 24 }"
+      >
         <section
           class="p-admin__droppable"
-          @mousemove="setPointerCoord"
           ref="droppable"
+          @mousemove="setPointerCoord"
         >
           <drop-content
+            :config="element"
             v-for="element in templateStore.elements"
             :key="element.id"
-            :config="element"
           />
-          <el-row class="hidden-sm-and-up" justify="center">
-            <el-button type="primary" plain :icon="Plus" @click="uiStore.toggleSidebar('select')">
+          <el-row
+            class="hidden-sm-and-up"
+            justify="center"
+          >
+            <el-button
+              type="primary"
+              plain
+              :icon="Plus"
+              @click="uiStore.toggleSidebar('select')"
+            >
               Add new template
             </el-button>
           </el-row>
@@ -97,48 +114,45 @@ import TemplateSelect from './sections/Select.vue'
 const router = useRouter()
 const uiStore = useUIStore()
 const templateStore = useTemplateStore()
-const droppable = ref(null)
+const droppable = ref( null )
 const menuActions = {
   'action-save': () => {
     templateStore.save()
-    console.log('saved')
   },
   'action-undo': () => {
     templateStore.undo()
-    console.log('undo')
   },
   'action-redo': () => {
     templateStore.redo()
-    console.log('redo')
   },
   'action-export': () => {
-    console.log('export')
-    exportToFile( `${Date.now()}-template.json`, JSON.stringify(templateStore.elements, null, 2) )
+    exportToFile( `${Date.now()}-template.json`, JSON.stringify( templateStore.elements, null, 2 ) )
   },
-  'action-import': (file) => {
-    if( file.name && file.size > 0 && file.name.endsWith('.json') ) {
-      extractData(file.raw, templateStore.importTemplate, (err) => { console.log('error', err) })
+  'action-import': ( file ) => {
+    if( file.name && file.size > 0 && file.name.endsWith( '.json' ) ) {
+      extractData( file.raw, templateStore.importTemplate, ( err ) => {
+        throw err
+      } )
     }
   },
   'action-view': () => {
     templateStore.resetFields()
-    router.push({ name: 'consumer' })
+    router.push( { name: 'consumer' } )
   }
 }
-
 /* Log coordinate */
-const pointerCoord = ref([0,0])
-const setPointerCoord = (e) => {
+const pointerCoord = ref( [0,0] )
+const setPointerCoord = ( e ) => {
   pointerCoord.value = [e.x, e.y]
 }
 
-const dropBounding = computed(() => {
+const dropBounding = computed( () => {
   if( droppable.value ) {
-    return (droppable.value as HTMLElement).getBoundingClientRect()
+    return ( droppable.value as HTMLElement ).getBoundingClientRect()
   }
-  return null
-})
 
+  return null
+} )
 /* Dragging */
 const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
   /**
@@ -146,10 +160,9 @@ const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
    */
   if( !e.target ) return
   const target = e.target as HTMLElement,
-        bounding = target.getBoundingClientRect()
-  
-  let shiftX = e.clientX - bounding.left,
-      shiftY = e.clientY - bounding.top
+    bounding = target.getBoundingClientRect()
+  const shiftX = e.clientX - bounding.left,
+    shiftY = e.clientY - bounding.top
 
   target.style.position = 'fixed'
   target.style.zIndex = '1000'
@@ -160,8 +173,10 @@ const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
     /* To specify whether the dragging element is in droppable zone */
     if( dropBounding.value ) {
       const { x, y, width, height } = dropBounding.value
+
       return pageX >= x && pageX <= x + width && pageY >= y && pageY <= y + height
     }
+
     return false
   }
 
@@ -174,22 +189,22 @@ const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
     pointerCoord.value = [pageX, pageY]
   }
 
-  moveAt(e.pageX, e.pageY)
+  moveAt( e.pageX, e.pageY )
   function onMouseMove( e: MouseEvent ) {
-    moveAt(e.pageX, e.pageY)
+    moveAt( e.pageX, e.pageY )
 
     /* To toggle overlay in droppable zone */
     if( !droppable.value ) return
-    if(inDropArea(e.pageX, e.pageY)) {
-      (droppable.value as HTMLElement).classList.add('active')
+    if( inDropArea( e.pageX, e.pageY ) ) {
+      ( droppable.value as HTMLElement ).classList.add( 'active' )
     } else {
-      (droppable.value as HTMLElement).classList.remove('active')
+      ( droppable.value as HTMLElement ).classList.remove( 'active' )
     }
   }
 
-  document.addEventListener('mousemove', onMouseMove)
-  target.onmouseup = (e) => {
-    document.removeEventListener('mousemove', onMouseMove)
+  document.addEventListener( 'mousemove', onMouseMove )
+  target.onmouseup = ( e ) => {
+    document.removeEventListener( 'mousemove', onMouseMove )
 
     /* Reset stylesheet */
     target.style.width = ''
@@ -198,12 +213,12 @@ const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
     target.style.zIndex = ''
     target.onmouseup = null
 
-    if(!droppable.value) return 
-    (droppable.value as HTMLElement).classList.remove('active')
+    if( !droppable.value ) return
+    ( droppable.value as HTMLElement ).classList.remove( 'active' )
 
     /* Proceed template insertion */
-    if(inDropArea(e.pageX, e.pageY)) {
-      templateStore.insert(part)
+    if( inDropArea( e.pageX, e.pageY ) ) {
+      templateStore.insert( part )
     }
   }
 }

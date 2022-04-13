@@ -2,7 +2,7 @@
   <div class="c-draggable">
     <component :is="icon" />
     <p>
-      <slot></slot>
+      <slot />
     </p>
   </div>
 </template>
