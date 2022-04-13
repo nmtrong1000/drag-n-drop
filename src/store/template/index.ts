@@ -1,6 +1,5 @@
-import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import type { IState, templatePart, templateConfig } from './types'
+import type { IState, TemplatePart, TemplateConfig } from './types'
 
 const initialState: IState = {
   registered: [],
@@ -35,8 +34,8 @@ export const useTemplateStore = defineStore( 'template', {
       this.reloadFromCache()
       console.log('imported')
     },
-    insert( { id, defaultProps }: templatePart ) {
-      const config: templateConfig = {
+    insert( { id, defaultProps }: TemplatePart ) {
+      const config: TemplateConfig = {
         id: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         component: id,
         props: {
@@ -46,17 +45,17 @@ export const useTemplateStore = defineStore( 'template', {
       this.editingId = config.id
       this.elements.push(config)
     },
-    remove(config: templateConfig) {
+    remove(config: TemplateConfig) {
       this.elements.splice( this.elements.indexOf(config), 1 )
     },
-    moveUp(config: templateConfig) {
+    moveUp(config: TemplateConfig) {
       const idx = this.elements.indexOf(config)
       if( idx > 0 ) {
         this.elements.splice(idx, 1)
         this.elements.splice(idx - 1, 0, config)
       }
     },
-    moveDown(config: templateConfig) {
+    moveDown(config: TemplateConfig) {
       const idx = this.elements.indexOf(config)
       if( idx < this.elements.length - 1 ) {
         this.elements.splice(idx, 1)

@@ -8,7 +8,7 @@ export type templateProps = {
   }
 }
 
-export type templatePart = {
+export type TemplatePart = {
   id: string
   title: string
   icon: any
@@ -19,15 +19,15 @@ export type templatePart = {
   defaultProps: templateProps
 }
 
-export type templateConfig = {
+export type TemplateConfig = {
   id: string
   component: string
   props: templateProps
 }
 
 export interface IState {
-  registered: templatePart[]
-  elements: templateConfig[]
+  registered: TemplatePart[]
+  elements: TemplateConfig[]
   editingId: string | null
   loaded: boolean
   history: string[]

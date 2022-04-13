@@ -1,11 +1,16 @@
 <template>
   <sidebar
     direction="right"
-    width="50vw"
-    :active="uiStore.sidebar.template"
+    width="60vw"
+    :active="uiStore.sidebar.edit"
     @close="uiStore.reset"
     title="Edit Template Part"
   >
+    <div>
+      <span>ID: </span>
+      <el-tag type="info">{{ selectedConfig?.id }}</el-tag>
+    </div>
+    <el-divider />
     <component
       :is="renderedComponent"
       :config="selectedConfig"
@@ -39,4 +44,4 @@ const renderedComponent = computed(() => {
 })
 
 </script>
-<style lang="scss" src="./style.scss" />
+<style lang="scss" src="../style.scss" />

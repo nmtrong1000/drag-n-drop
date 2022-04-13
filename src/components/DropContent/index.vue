@@ -1,10 +1,10 @@
 <template>
   <div class="c-dropcontent">
     <el-row>
-      <el-col :span="16">
+      <el-col :span="12">
         <el-tag type="info">{{ config.id }}</el-tag>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="12">
         <el-row justify="end">
           <el-button @click="openEditor" type="primary" :icon="Edit" circle size="small" title="Edit" />
           <el-button type="warning" :icon="ArrowUp" circle size="small" title="Move Up" @click="templateStore.moveUp(config)" />
@@ -30,11 +30,11 @@ import {
 } from '@element-plus/icons-vue'
 
 import { useTemplateStore } from 'src/store/template'
-import type { templateConfig } from 'src/store/template/types'
+import type { TemplateConfig } from 'src/store/template/types'
 import { useUIStore } from 'src/store/ui'
 
 const props = defineProps<{
-  config: templateConfig
+  config: TemplateConfig
 }>()
 
 const templateStore = useTemplateStore()
@@ -45,7 +45,7 @@ const renderedComponent = computed(() => {
 })
 
 const openEditor = () => {
-  uiStore.toggleSidebar('template')
+  uiStore.toggleSidebar('edit')
   templateStore.$patch({
     editingId: props.config.id
   })

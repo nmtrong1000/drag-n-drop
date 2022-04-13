@@ -13,10 +13,10 @@
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import type { templateConfig } from 'src/store/template/types'
+import type { TemplateConfig } from 'src/store/template/types'
 
 const props = defineProps<{
-  config: templateConfig
+  config: TemplateConfig
 }>()
 
 const configForm = reactive({

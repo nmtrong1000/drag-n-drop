@@ -1,24 +1,25 @@
 <template>
-  <main>
-    <div>
+  <el-container class="p-consumer">
+    <el-header class="p-consumer__header">
       <router-link :to="{ name: 'admin' }">
-        <el-button>Back</el-button>
+        <el-button :icon="Back">Back</el-button>
       </router-link>
-    </div>
-    <el-divider />
-    <div
-      v-for="e in elements"
-      :key="e.id"
-    >
-      <component
-        :is="getBaseComponent(e.component)"
-        :config="e"
-      />
-    </div>
-  </main>
+    </el-header>
+    <el-main>
+      <div
+        v-for="e in elements"
+        :key="e.id"
+      >
+        <component
+          :is="getBaseComponent(e.component)"
+          :config="e"
+        />
+      </div>
+    </el-main>
+  </el-container>
 </template>
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { Back } from '@element-plus/icons-vue'
 import { storeToRefs } from 'pinia'
 import { useTemplateStore } from 'src/store/template'
 

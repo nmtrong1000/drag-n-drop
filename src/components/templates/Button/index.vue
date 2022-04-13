@@ -4,9 +4,9 @@
   </button>
 </template>
 <script lang="ts" setup>
-import type { templateConfig } from 'src/store/template/types'
+import type { TemplateConfig } from 'src/store/template/types'
 const props = defineProps<{
-  config: templateConfig
+  config: TemplateConfig
 }>()
 const notifyMessage = () => {
   const { actionMsg } = props.config.props.extensions || {}

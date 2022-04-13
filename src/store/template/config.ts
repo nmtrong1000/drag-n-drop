@@ -1,11 +1,11 @@
 import { defineAsyncComponent, markRaw } from 'vue'
-import type { templatePart } from './types'
+import type { TemplatePart } from './types'
 import {
   CirclePlus,
   Document
 } from '@element-plus/icons-vue'
 
-export const templateConfig: templatePart[] = [
+export const templateConfig: TemplatePart[] = [
   {
     id: 'template-button',
     title: 'Button',

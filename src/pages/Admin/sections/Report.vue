@@ -33,4 +33,4 @@ const selected = computed(() => {
   return null
 })
 </script>
-<style lang="scss" src="./style.scss" scoped />
+<style lang="scss" src="../style.scss" />

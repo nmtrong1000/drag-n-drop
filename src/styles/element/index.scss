@@ -31,6 +31,7 @@ $--font-family: (
   '': 'Roboto, sans-serif'
 );
 
+@use 'element-plus/theme-chalk/display.css';
 // You should use them in scss, because we calculate it by sass.
 // comment next lines to use default color
 @forward 'element-plus/theme-chalk/src/common/var.scss' with

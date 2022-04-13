@@ -10,6 +10,9 @@
   @include visible(false);
   width: 100%;
   z-index: 2;
+  @include mediaQuery( xs ) {
+    max-width: 100% !important;
+  }
   &__content {
     background-color: var(--el-bg-color);
     transform: translateX(-100%);

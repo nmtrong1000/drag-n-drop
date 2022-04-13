@@ -6,7 +6,8 @@ const initialState: IState = {
   loading: false,
   loadingText: '',
   sidebar: {
-    template: false
+    edit: false,
+    select: false
   }
 }
 
