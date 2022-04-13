@@ -51,7 +51,7 @@
         <nav>
           <draggable
             :icon="part.icon"
-            v-for="(part, idx) in templateConfig"
+            v-for="(part, idx) in templateParts"
             :key="idx"
             @mousedown="(e) => handleDragging(e, part)"
             @dragstart="handleDragStart"
@@ -69,6 +69,10 @@
           ref="droppable"
           @mousemove="setPointerCoord"
         >
+          <el-empty
+            description="Nothing has been imported"
+            v-if="templateStore.elements.length === 0"
+          />
           <drop-content
             :config="element"
             v-for="element in templateStore.elements"
@@ -95,6 +99,32 @@
     </el-row>
     <template-select />
     <admin-editor />
+    <el-dialog
+      width="40%"
+      v-model="isUnsaved"
+    >
+      <span>
+        Changes will be discarded.
+        Are you sure?
+      </span>
+      <template #footer>
+        <el-row justify="center">
+          <el-button
+            size="small"
+            @click="isUnsaved = false"
+          >
+            Cancel
+          </el-button>
+          <el-button
+            size="small"
+            type="primary"
+            @click="confirmUnsaved"
+          >
+            I don't give a shit
+          </el-button>
+        </el-row>
+      </template>
+    </el-dialog>
   </main>
 </template>
 <script lang="ts" setup>
@@ -103,9 +133,8 @@ import { Plus } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { exportToFile, extractData } from 'src/helpers'
 import { useUIStore } from 'src/store/ui'
-import { templateConfig } from 'src/store/template/config'
+import { templateParts } from 'src/config'
 import { useTemplateStore } from 'src/store/template'
-import type { TemplatePart } from 'src/store/template/types'
 import { menu } from './mocks/menu'
 import AdminEditor from './sections/Editor.vue'
 import AdminReport from './sections/Report.vue'
@@ -115,6 +144,12 @@ const router = useRouter()
 const uiStore = useUIStore()
 const templateStore = useTemplateStore()
 const droppable = ref( null )
+const isUnsaved = ref( false )
+const confirmUnsaved = () => {
+  templateStore.resetFields()
+  router.push( { name: 'consumer' } )
+}
+
 const menuActions = {
   'action-save': () => {
     templateStore.save()
@@ -130,14 +165,15 @@ const menuActions = {
   },
   'action-import': ( file ) => {
     if( file.name && file.size > 0 && file.name.endsWith( '.json' ) ) {
-      extractData( file.raw, templateStore.importTemplate, ( err ) => {
-        throw err
-      } )
+      extractData( file.raw, templateStore.import )
     }
   },
   'action-view': () => {
-    templateStore.resetFields()
-    router.push( { name: 'consumer' } )
+    if( !templateStore.saved ) {
+      isUnsaved.value = true
+    } else {
+      confirmUnsaved()
+    }
   }
 }
 /* Log coordinate */
@@ -160,8 +196,8 @@ const handleDragging = ( e: MouseEvent, part: TemplatePart ) => {
    */
   if( !e.target ) return
   const target = e.target as HTMLElement,
-    bounding = target.getBoundingClientRect()
-  const shiftX = e.clientX - bounding.left,
+    bounding = target.getBoundingClientRect(),
+    shiftX = e.clientX - bounding.left,
     shiftY = e.clientY - bounding.top
 
   target.style.position = 'fixed'

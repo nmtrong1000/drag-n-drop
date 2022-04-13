@@ -18,6 +18,11 @@
       :key="selectedConfig?.id"
       :is="renderedComponent"
     />
+    <template #footer>
+      <el-row justify="center">
+        <el-button @click="templateStore.save();uiStore.reset()">Save</el-button>
+      </el-row>
+    </template>
   </sidebar>
 </template>
 <script lang="ts" setup>
@@ -42,6 +47,5 @@ const selected = computed( () => {
 const renderedComponent = computed( () => {
   return selected.value ? selected.value.component.editor: null
 } )
-
 </script>
 <style lang="scss" src="../style.scss" />

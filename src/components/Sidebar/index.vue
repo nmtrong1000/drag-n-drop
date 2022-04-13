@@ -21,6 +21,9 @@
       <div class="c-sidebar__inner">
         <slot />
       </div>
+      <footer v-if="$slots.footer">
+        <slot name="footer" />
+      </footer>
     </div>
   </aside>
 </template>
@@ -29,9 +32,9 @@ import { Close } from '@element-plus/icons-vue'
 
 withDefaults(
   defineProps<{
-    direction: 'left' | 'right'
     width: string
     active: boolean
+    direction?: 'left' | 'right'
     title?: string
   }>(), {
     direction: 'left',

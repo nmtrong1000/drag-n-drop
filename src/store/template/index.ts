@@ -1,13 +1,17 @@
 import { defineStore } from 'pinia'
-import type { IState, TemplatePart, TemplateConfig } from './types'
+import type { IState, TemplateConfig } from './types'
+import { HandledError } from 'src/helpers/HandledError'
+import { saveTemplate, getTemplate } from 'src/api'
+import { generateId } from 'src/helpers'
 
 const initialState: IState = {
   registered: [],
   elements: [],
   editingId: null,
   loaded: false,
-  history: [],
-  historyHead: 0
+  history: ['[]'],
+  historyHead: 0,
+  saved: false
 }
 
 export const useTemplateStore = defineStore( 'template', {
@@ -17,26 +21,32 @@ export const useTemplateStore = defineStore( 'template', {
       this.registered = [...parts]
     },
     reloadFromCache() {
-      const cached = localStorage.getItem( 'template' )
+      const cached = getTemplate()
 
       if( cached ) {
-        this.elements = [...JSON.parse( cached )]
+        try {
+          this.elements = [...JSON.parse( cached )]
+        } catch {
+          saveTemplate( [] )
+          throw new HandledError( 'Failed to load cached template.' )
+        }
+
         this.loaded = true
       } else {
-        localStorage.setItem( 'template', '[]' )
+        saveTemplate( [] )
       }
     },
     loadTemplate() {
       if( this.loaded ) return
       this.reloadFromCache()
     },
-    importTemplate( data ) {
-      localStorage.setItem( 'template', JSON.stringify( data ) )
+    import( data ) {
+      saveTemplate( data )
       this.reloadFromCache()
     },
     insert( { id, defaultProps }: TemplatePart ) {
       const config: TemplateConfig = {
-        id: `${Date.now()}-${Math.floor( Math.random() * 1000 )}`,
+        id: generateId(),
         component: id,
         props: {
           ...defaultProps
@@ -68,13 +78,16 @@ export const useTemplateStore = defineStore( 'template', {
     save() {
       const json = JSON.stringify( this.elements )
 
-      localStorage.setItem( 'template', json )
+      saveTemplate( this.elements )
       this.history.push( json )
       this.historyHead = this.history.length - 1
     },
     loadHistory() {
-      if( this.history[this.historyHead] ) {
+      try {
         this.elements = JSON.parse( this.history[this.historyHead] )
+      } catch {
+        this.reloadFromCache()
+        throw new HandledError( 'Failed to load cached template.' )
       }
     },
     undo() {

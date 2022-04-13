@@ -4,10 +4,10 @@
   </component>
 </template>
 <script lang="ts" setup>
-import { defineAsyncComponent, computed, onMounted } from 'vue'
+import { defineAsyncComponent, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTemplateStore } from 'src/store/template'
-import { templateConfig } from 'src/store/template/config'
+import { templateParts } from 'src/config'
 
 const { currentRoute } = useRouter()
 const layoutMappings = {
@@ -20,8 +20,18 @@ const layout = computed( () => {
 } )
 const templateStore = useTemplateStore()
 
-templateStore.register( templateConfig )
+templateStore.register( templateParts )
+
+const unsubscribe = templateStore.$onAction( ( { name, store } ) => {
+  console.log( 'name', name )
+  store.saved = name === 'save'
+} )
+
 onMounted( () => {
   templateStore.loadTemplate()
+} )
+
+onUnmounted( () => {
+  unsubscribe()
 } )
 </script>

@@ -1,4 +1,4 @@
-export type templateProps = {
+export type TemplateProps = {
   content: string
   style?: {
     [k: string]: string
@@ -8,21 +8,10 @@ export type templateProps = {
   }
 }
 
-export type TemplatePart = {
-  id: string
-  title: string
-  icon: any
-  component: {
-    base: any
-    editor: any
-  }
-  defaultProps: templateProps
-}
-
 export type TemplateConfig = {
   id: string
   component: string
-  props: templateProps
+  props: TemplateProps
 }
 
 export interface IState {
@@ -32,4 +21,5 @@ export interface IState {
   loaded: boolean
   history: string[]
   historyHead: number
+  saved: boolean
 }

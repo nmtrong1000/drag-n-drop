@@ -8,15 +8,12 @@
       </router-link>
     </el-header>
     <el-main>
-      <div
+      <component
+        :config="e"
         v-for="e in elements"
         :key="e.id"
-      >
-        <component
-          :config="e"
-          :is="getBaseComponent(e.component)"
-        />
-      </div>
+        :is="getBaseComponent(e.component)"
+      />
     </el-main>
   </el-container>
 </template>

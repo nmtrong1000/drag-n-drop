@@ -148,6 +148,16 @@ module.exports = {
     'vue/require-v-for-key': 'warn',
     'vue/require-default-prop': 'off',
     'vue/require-valid-default-prop': 'error',
-    'vue/multi-word-component-names': 'off'
-  }
+    'vue/multi-word-component-names': 'off',
+    'vue/no-v-model-argument': 'off'
+  },
+  overrides: [
+    {
+      /* Hotfix: global types are not recognized */
+      files: ['*.ts', '*.vue'],
+      rules: {
+        'no-undef': 'off'
+      }
+    }
+  ]
 }

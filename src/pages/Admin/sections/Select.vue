@@ -7,7 +7,7 @@
   >
     <draggable
       :icon="part.icon"
-      v-for="(part, idx) in templateConfig"
+      v-for="(part, idx) in templateParts"
       :key="idx"
       @click="handleClick(part)"
     >
@@ -16,7 +16,7 @@
   </sidebar>
 </template>
 <script lang="ts" setup>
-import { templateConfig } from 'src/store/template/config'
+import { templateParts } from 'src/config'
 import { useUIStore } from 'src/store/ui'
 import { useTemplateStore } from 'src/store/template'
 

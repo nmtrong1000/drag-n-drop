@@ -1,3 +1,5 @@
+import { HandledError } from './HandledError'
+
 export const encodeHTML = ( dirty: string ) => {
   return dirty
 }
@@ -13,7 +15,7 @@ export const exportToFile = ( fileName: string, data: string ) => {
   }
 }
 
-export const extractData = ( file, onSuccess, onError ) => {
+export const extractData = ( file, onSuccess ) => {
   const reader = new FileReader()
 
   reader.readAsText( file, 'UTF-8' )
@@ -24,12 +26,16 @@ export const extractData = ( file, onSuccess, onError ) => {
 
         onSuccess( data )
       } catch( e ) {
-        onError( e )
+        throw new HandledError( 'Invalid JSON format.' )
       }
     }
   }
 
   reader.onerror = ( e ) => {
-    onError( e )
+    throw new HandledError( 'Something went wrong while importing this file.' )
   }
+}
+
+export const generateId = () => {
+  return `${Date.now()}-${Math.floor( Math.random() * 10000 )}`
 }

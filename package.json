@@ -10,9 +10,7 @@
     "lint:fix": "npx eslint --ext .js,.vue,.ts --config .eslintrc.js --ignore-path .eslintignore --fix src",
     "lint:style": "stylelint --config .stylelintrc.js src/styles/**/*.scss",
     "lint:style:fix": "stylelint --config .stylelintrc.js --fix src/styles/**/*.scss",
-    "test:unit": "jest -c jest.config.js --passWithNoTests src",
-    "test:integration": "cypress open-ct",
-    "test:e2e": "cypress open"
+    "test:unit": "jest -c jest.config.js --passWithNoTests src"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
@@ -20,6 +18,7 @@
     "@vue/apollo-composable": "^4.0.0-alpha.16",
     "@vuelidate/core": "^2.0.0-alpha.40",
     "@vuelidate/validators": "^2.0.0-alpha.28",
+    "@vueup/vue-quill": "^1.0.0-beta.8",
     "@vueuse/head": "^0.7.5",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
@@ -35,8 +34,6 @@
     "vue-router": "4"
   },
   "devDependencies": {
-    "@cypress/vite-dev-server": "^2.2.2",
-    "@cypress/vue": "^3.1.1",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
@@ -45,7 +42,6 @@
     "@vue/compiler-sfc": "^3.2.31",
     "@vue/test-utils": "^2.0.0-rc.18",
     "babel-jest": "^27.5.1",
-    "cypress": "^9.5.3",
     "eslint": "^8.12.0",
     "eslint-plugin-vue": "^8.5.0",
     "husky": "^7.0.4",
