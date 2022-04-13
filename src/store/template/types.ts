@@ -30,6 +30,6 @@ export interface IState {
   elements: templateConfig[]
   editingId: string | null
   loaded: boolean
-  backward: templateConfig[]
-  forward: templateConfig[]
+  history: string[]
+  historyHead: number
 }

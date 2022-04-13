@@ -1,11 +1,19 @@
 <template>
   <div class="c-dropcontent">
-    <el-row justify="end">
-      <el-button @click="openEditor" type="primary" :icon="Edit" circle size="small" title="Edit" />
-      <el-button type="warning" :icon="ArrowUp" circle size="small" title="Move Up" @click="templateStore.moveUp(config)" />
-      <el-button type="warning" :icon="ArrowDown" circle size="small" title="Move Down" @click="templateStore.moveDown(config)" />
-      <el-button type="danger" :icon="Close" circle size="small" title="Remove" @click="templateStore.remove(config)" />
+    <el-row>
+      <el-col :span="16">
+        <el-tag type="info">{{ config.id }}</el-tag>
+      </el-col>
+      <el-col :span="8">
+        <el-row justify="end">
+          <el-button @click="openEditor" type="primary" :icon="Edit" circle size="small" title="Edit" />
+          <el-button type="warning" :icon="ArrowUp" circle size="small" title="Move Up" @click="templateStore.moveUp(config)" />
+          <el-button type="warning" :icon="ArrowDown" circle size="small" title="Move Down" @click="templateStore.moveDown(config)" />
+          <el-button type="danger" :icon="Close" circle size="small" title="Remove" @click="templateStore.remove(config)" />
+        </el-row>
+      </el-col>
     </el-row>
+    <el-divider />
     <component
       :is="renderedComponent"
       :config="config"

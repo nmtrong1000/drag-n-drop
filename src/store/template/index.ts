@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import { defineStore } from 'pinia'
 import type { IState, templatePart, templateConfig } from './types'
 
@@ -6,8 +7,8 @@ const initialState: IState = {
   elements: [],
   editingId: null,
   loaded: false,
-  backward: [],
-  forward: []
+  history: [],
+  historyHead: 0
 }
 
 export const useTemplateStore = defineStore( 'template', {
@@ -63,14 +64,33 @@ export const useTemplateStore = defineStore( 'template', {
       }
     },
     save() {
-      localStorage.setItem('template', JSON.stringify(this.elements))
-      this.backward = [...this.elements]
+      const json = JSON.stringify(this.elements)
+      localStorage.setItem('template', json)
+      this.history.push(json)
+      this.historyHead = this.history.length - 1
+    },
+    loadHistory() {
+      console.log('history', this.history[this.historyHead])
+      if( this.history[this.historyHead] ) {
+        this.elements = JSON.parse(this.history[this.historyHead])
+      }
     },
     undo() {
-      
+      if( this.history.length > 0 && this.historyHead !== 0 ) {
+        this.historyHead--
+      }
+      this.loadHistory()
     },
     redo() {
-      
+      if( this.history.length > 0 && this.historyHead < this.history.length - 1 ) {
+        this.historyHead++
+      }
+      this.loadHistory()
+    },
+    resetFields() {
+      this.history = []
+      this.historyHead = 0
+      this.editingId = null
     }
   }
 } )

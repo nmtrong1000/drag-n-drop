@@ -106,6 +106,7 @@ const menuActions = {
     }
   },
   'action-view': () => {
+    templateStore.resetFields()
     router.push({ name: 'consumer' })
   }
 }

@@ -9,6 +9,7 @@
     <component
       :is="renderedComponent"
       :config="selectedConfig"
+      :key="selectedConfig?.id"
     />
   </sidebar>
 </template>
