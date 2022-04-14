@@ -4,3 +4,8 @@
 body {
   font-family: var(--el-font-family);
 }
+
+/* Quill hotfix */
+.ql-align-center {
+  text-align: center;
+}

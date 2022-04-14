@@ -19,6 +19,7 @@ Besides, it is easy to extend template parts by changing config and including cu
   - [Vue Router](https://router.vuejs.org/installation.html): Site travel routes
   - [Pinia](https://pinia.vuejs.org/introduction.html): State Management
   - [Element Plus](https://element-plus.org/en-US/guide/design.html): UX/UI library
+  - [Vue Quill](https://vueup.github.io/vue-quill/guide/): Advanced text editor
   - [Vite](https://vitejs.dev/guide/): A very useful frontend devtools
   - [Eslint](https://eslint.org/): Code linter
   - [Stylelint](https://stylelint.io/): Stylesheet linter
