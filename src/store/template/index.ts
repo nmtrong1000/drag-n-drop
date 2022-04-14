@@ -105,7 +105,7 @@ export const useTemplateStore = defineStore( 'template', {
       this.loadHistory()
     },
     resetFields() {
-      this.history = []
+      this.history = ['[]']
       this.historyHead = 0
       this.editingId = null
     }

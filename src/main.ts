@@ -34,7 +34,7 @@ app.use( router )
 app.config.errorHandler = ( err, vm, info ) => {
   /* Global Exception handler */
   if( err instanceof HandledError ) {
-    console.log( 'handled:', err )
+    console.error( '[HANDLED]', err.message )
   } else {
     console.error( err )
   }

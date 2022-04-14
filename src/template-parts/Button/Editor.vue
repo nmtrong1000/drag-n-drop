@@ -62,4 +62,3 @@ const configForm = reactive( {
   ...props.config
 } )
 </script>
-<style lang="scss" src="./style.scss" scoped />

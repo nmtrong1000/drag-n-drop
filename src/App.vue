@@ -23,7 +23,6 @@ const templateStore = useTemplateStore()
 templateStore.register( templateParts )
 
 const unsubscribe = templateStore.$onAction( ( { name, store } ) => {
-  console.log( 'name', name )
   store.saved = name === 'save'
 } )
 

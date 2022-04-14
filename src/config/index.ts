@@ -4,15 +4,23 @@ import {
   Document
 } from '@element-plus/icons-vue'
 
+function importTemplate( path: string ) {
+  return markRaw( defineAsyncComponent( () => import( /* @vite-ignore */ path ) ) )
+}
+
+function getTemplateComponents( name: string ) {
+  return {
+    base: importTemplate( `../template-parts/${name}/Base.vue` ),
+    editor: importTemplate( `../template-parts/${name}/Editor.vue` )
+  }
+}
+
 export const templateParts: TemplatePart[] = [
   {
     id: 'template-button',
     title: 'Button',
     icon: CirclePlus,
-    component:{
-      base: markRaw( defineAsyncComponent( () => import( 'src/template-parts/Button/ButtonBase.vue' ) ) ),
-      editor: markRaw( defineAsyncComponent( () => import( 'src/template-parts/Button/ButtonEditor.vue' ) ) )
-    },
+    component: getTemplateComponents( 'Button' ),
     defaultProps: {
       content: 'Button',
       style: {
@@ -33,15 +41,9 @@ export const templateParts: TemplatePart[] = [
     id: 'template-paragraph',
     title: 'Paragraph',
     icon: Document,
-    component: {
-      base: markRaw( defineAsyncComponent( () => import( 'src/template-parts/Paragraph/ParagraphBase.vue' ) ) ),
-      editor: markRaw( defineAsyncComponent( () => import( 'src/template-parts/Paragraph/ParagraphEditor.vue' ) ) )
-    },
+    component: getTemplateComponents( 'Paragraph' ),
     defaultProps: {
-      content: 'Paragraph',
-      style: {
-        color: '#000000'
-      }
+      content: 'Paragraph'
     }
   }
 ]

@@ -2,8 +2,8 @@
   <el-container class="p-consumer">
     <el-header class="p-consumer__header">
       <router-link :to="{ name: 'admin' }">
-        <el-button :icon="Back">
-          Back
+        <el-button>
+          Edit Template
         </el-button>
       </router-link>
     </el-header>
@@ -18,7 +18,6 @@
   </el-container>
 </template>
 <script lang="ts" setup>
-import { Back } from '@element-plus/icons-vue'
 import { storeToRefs } from 'pinia'
 import { useTemplateStore } from 'src/store/template'
 

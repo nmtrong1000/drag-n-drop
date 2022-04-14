@@ -1,12 +1,6 @@
 <template>
   <el-form :model="configForm">
     <el-form-item
-      label="Color"
-      v-if="configForm.props.style"
-    >
-      <el-color-picker v-model="configForm.props.style.color" />
-    </el-form-item>
-    <el-form-item
       label="Content"
       style="display: block"
     >
@@ -18,7 +12,8 @@
             ['bold', 'italic', 'underline', 'blockquote'],
             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
             [{ 'indent': '-1'}, { 'indent': '+1' }],
-            [{ 'color': [] }, { 'background': [] }]
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'align': [] }]
           ]"
           :content="configForm.props.content"
           content-type="html"
@@ -41,4 +36,3 @@ const configForm = reactive( {
   ...props.config
 } )
 </script>
-<style lang="scss" src="./style.scss" scoped />
