@@ -1,0 +1,17 @@
+@use 'src/styles/common/mixins' as *;
+
+.c-loading {
+  transition: .2s ease;
+  @include fullWidth02( 1000 );
+  @include visible( false );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &--active {
+    @include visible( true );
+  }
+  p {
+    color: var(--el-color-white)
+  }
+}

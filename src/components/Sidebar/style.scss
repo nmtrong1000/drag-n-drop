@@ -1,0 +1,75 @@
+@use 'src/styles/common/mixins' as *;
+
+.c-sidebar {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  transition: .2s ease;
+  @include visible(false);
+  width: 100%;
+  z-index: 2;
+  @include mediaQuery( xs ) {
+    max-width: 100% !important;
+  }
+  &__content {
+    background-color: var(--el-bg-color);
+    transform: translateX(-100%);
+    transition: .2s ease;
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    height: 100vh;
+  }
+  &__inner {
+    padding: 10px;
+    min-height: calc(100vh - 50px);
+  }
+  &--right {
+    left: auto;
+    right: 0;
+  }
+  &--right &__content {
+    transform: translateX(100%);
+  }
+  &--active {
+    @include visible(true);
+  }
+  &--active &__content {
+    transform: translateX(0);
+  }
+  header {
+    border-bottom: 1px solid var(--el-border-color);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    width: 100%;
+    padding: 10px;
+    .el-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    > p {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      padding: 0 40px;
+      font-size: var(--el-font-size-large);
+    }
+  }
+  footer {
+    border-top: 1px solid var(--el-border-color);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--el-bg-color);
+  }
+}

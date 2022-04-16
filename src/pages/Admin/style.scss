@@ -1,0 +1,60 @@
+@use 'src/styles/common/mixins' as *;
+@use 'sass:map';
+
+.p-admin {
+  &__header {
+    border-bottom: 1px solid var(--el-border-color);
+    padding: 4px 10px 3px;
+    .el-col {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    button, .el-upload {
+      width: 100%;
+    }
+  }
+  &__inner {
+    max-height: 100%;
+    @include mediaQuery( md ) {
+      height: calc(100vh - 50px);
+    }
+    nav {
+      border-right: 1px solid var(--el-border-color);
+      overflow: auto;
+      @include mediaQuery( md ) {
+        height: calc(100vh - 50px);
+      }
+    }
+    section {
+      overflow: auto;
+      padding: 10px;
+      @include mediaQuery( md ) {
+        height: calc(100vh - 200px);
+      }
+      > div {
+        margin-bottom: 10px;
+      }
+    }
+    footer {
+      border-top: 1px solid var(--el-border-color);
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: auto;
+      height: 150px;
+      padding: 10px;
+    }
+  }
+  &__droppable {
+    position: relative;
+    &:after {
+      content: '';
+      background-color: rgba(map.get($colors, 'primary', 'base'), .2);
+      border: 1px solid var(--el-color-primary);
+      @include fullWidth();
+      @include visible(false);
+    }
+    &.active::after {
+      @include visible(true);
+    }
+  }
+}

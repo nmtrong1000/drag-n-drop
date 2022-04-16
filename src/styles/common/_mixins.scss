@@ -1,0 +1,70 @@
+@use 'src/styles/common/variables' as *;
+@use 'sass:string';
+
+@mixin fullWidth( $px: 0, $pos: absolute, $zIndex: 1 ) {
+  /// Fully align an absolute element
+  position: string.unquote($pos);
+  top: $px;
+  left: $px;
+  right: $px;
+  bottom: $px;
+  z-index: $zIndex;
+}
+
+@mixin fullWidth02( $zIndex: 1 ) {
+  /// Fully align an absolute element
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: $zIndex;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin center( $x: true, $y: true, $pos: absolute ) {
+  /// Center an absolute element
+  position: string.unquote($pos);
+
+  $posX: 0;
+  $posY: 0;
+
+  @if $x {
+    left: 50%;
+    $posX: -50%;
+  }
+
+  @if $y {
+    top: 50%;
+    $posY: -50%;
+  }
+
+  transform: translate($posX, $posY);
+  @content;
+}
+
+@mixin visible( $flag: true ) {
+  /// Visible and invisible
+  @if $flag {
+    visibility: visible;
+    opacity: 1;
+  } @else {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@mixin mediaQuery( $breakpoint: 'full' ) {
+  $breakpoint: $breakpoint;
+
+  @if $breakpoint == full {
+    @content;
+  } @else if  $breakpoint == xs {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}

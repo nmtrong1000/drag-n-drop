@@ -1,0 +1,11 @@
+@use 'element-plus/theme-chalk/src/message.scss' as *;
+@use 'common/reset' as *;
+
+body {
+  font-family: var(--el-font-family);
+}
+
+/* Quill hotfix */
+.ql-align-center {
+  text-align: center;
+}

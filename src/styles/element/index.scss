@@ -1,0 +1,53 @@
+$--colors: (
+  'black': #34495e,
+  'primary': (
+    'base': #41b896,
+  ),
+  'success': (
+    'base': #64d2ed,
+  ),
+  'warning': (
+    'base': #ffd611,
+  ),
+  'danger': (
+    'base': #ff4557,
+  ),
+  'error': (
+    'base': #ff4557,
+  ),
+  'info': (
+    'base': #0a84ed,
+  )
+);
+$--border-radius: (
+  'base': 0,
+  'small': 2px,
+  'round': 20px,
+  'circle': 100%
+);
+$--font-family: (
+  '': 'Roboto, sans-serif'
+);
+
+@use 'element-plus/theme-chalk/display.css';
+
+// You should use them in scss, because we calculate it by sass.
+// comment next lines to use default color
+@forward 'element-plus/theme-chalk/src/common/var.scss' with
+  (
+
+    $colors: $--colors,
+    $button-padding-horizontal: ('default': 50px),
+    $border-radius: $--border-radius,
+    $font-family: $--font-family
+  );
+
+// if you want to import all
+// @use "element-plus/theme-chalk/src/index.scss" as *;
+
+// You can comment it to hide debug info.
+// @debug $--colors;
+
+.el-divider--horizontal {
+  margin: 12px 0;
+}
